@@ -3,192 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambex</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Ambex Loader en Intro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
-        /* CSS om de tabel kleiner te maken */
-        .price-table {
-            width: 50%; /* Maak de tabel smaller */
-            margin: auto; /* Centreer de tabel */
-            font-size: 12px; /* Verklein de tekstgrootte */
-            border-collapse: collapse; /* Geen ruimte tussen cellen */
+        /* Basis styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
         }
 
-        .price-table th, .price-table td {
-            padding: 5px; /* Verminder de opvulling */
-            border: 1px solid #ddd; /* Dunne rand rond de cellen */
+        /* Loader container */
+        #loader {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            z-index: 10;
+            background-image: url('OFFlogo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            animation: fadeOut 3s forwards;
         }
 
-        .price-table th {
-            background-color: #f4f4f4; /* Achtergrondkleur voor de koptekst */
-        }
-
-        .booking-policy-content, .terms-content {
+        /* Verberg de rest van de inhoud tijdens het laden */
+        #content {
             display: none;
+            padding-top: 60px;
         }
 
-        .booking-policy-content.open, .terms-content.open {
-            display: block;
-        }
-
-        .btn {
-            cursor: pointer;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-        }
-
-        .header, .footer, .nav, .section {
-            text-align: center;
-            margin: 20px;
+        /* Stijl voor de navigatiebalk */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            width: 100%;
+            max-width: 1200px;
         }
 
         .nav a {
-            margin: 0 15px;
-            text-decoration: none;
             color: #007BFF;
-        }
-
-        .footer {
-            margin-top: 20px;
-        }
-
-        .social-media a {
+            text-decoration: none;
+            padding: 10px;
             margin: 0 10px;
-            text-decoration: none;
-            color: #007BFF;
+            font-weight: bold;
+        }
+
+        /* Welkomsttekst en inhoud */
+        .section {
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            margin: 20px;
+        }
+
+        /* Raster layout voor de websites */
+        .website-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        /* Glow Button */
+        .glow-on-hover {
+            width: 220px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+            color: #000;
+        }
+
+        .glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing {
+            0% { background-position: 0 0; }
+            50% { background-position: 400% 0; }
+            100% { background-position: 0 0; }
+        }
+
+        /* Stijl voor de iframe */
+        #iframe-container {
+            margin: 20px;
+            text-align: center;
+        }
+
+        iframe {
+            width: 80%;
+            height: 500px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #fff;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Fade out animation */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                display: none; /* Verbergt de loader na de fade-out */
+            }
+        }
+
+        /* Detail Button */
+        .detail-button {
+            width: 100px;
+            height: 40px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #007BFF;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .detail-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Details section */
+        .website-details {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <div class="header">
-        <div style="display: flex; align-items: center;">
-            <img src="5951625693480627613.webp" alt="Logo" style="height: 50px; margin-right: 10px;">
-            <h1 style="font-size: 24px; margin: 0;">Ambex</h1>
+
+    <!-- Loader Section -->
+    <div id="loader"></div>
+
+    <!-- Rest van de inhoud -->
+    <div id="content">
+        <!-- Navigatiebalk -->
+        <div class="nav">
+            <a href="#home">Home</a>
+            <a href="#over-ons">Over Ons</a>
+            <a href="#team">Team</a>
+            <a href="#contact">Info</a>
+            <a href="#portfolio">Portfolio</a>
         </div>
+
+        <!-- Welkomsttekst -->
+        <div class="section" id="home">
+            <h1>Welkom bij Ambex</h1>
+            <p>Bij Ambex streven we naar perfectie en innovatie in alles wat we doen. Ontdek hoe wij de industrie transformeren met onze baanbrekende oplossingen en diensten.</p>
+        </div>
+
+        <!-- Over Ons -->
+        <div class="section" id="over-ons">
+            <h2>Over Ons</h2>
+            <p>
+                Ambex is een toonaangevend bedrijf dat zich richt op het leveren van geavanceerde oplossingen en diensten op verschillende terreinen. Naast onze expertise in web engineering, waar we innovatieve en hoogwaardige digitale oplossingen bieden, zijn we bezig met het opzetten van een unieke kledinglijn. Deze lijn zal de waarden van creativiteit, stijl en vakmanschap weerspiegelen. Met een team van deskundigen streven wij ernaar om niet alleen de beste resultaten voor onze klanten te behalen, maar ook om grenzen te verleggen in zowel de tech- als mode-industrie.
+                
+                Bij Ambex draait alles om innovatie, kwaliteit en een gedurfde visie op de toekomst.
+            </p>
+        </div>
+
+        <!-- Team -->
+        <div class="section" id="team">
+            <h2>Ons Team</h2>
+            <p><strong>Powered by Ambex</strong></p>
+            <p>Ons team bestaat uit gepassioneerde professionals met expertise op verschillende gebieden. Wij werken samen om de hoogste normen van kwaliteit en klanttevredenheid te waarborgen. Ontdek meer over onze experts en hun bijdragen aan ons succes.</p>
+        </div>
+
+        <!-- Contact / Adres -->
+        <div class="section" id="contact">
+            <h2>Contact / Adres</h2>
+            <p>Voor afspraken en vragen kunt u eenvoudig contact met ons opnemen via de bovenstaande methoden. Wij staan klaar om u te helpen en te zorgen voor een geweldige ervaring bij Ambex.</p> 
+        </div>
+
+        <!-- Portfolio / Website Grid -->
+        <div class="section" id="portfolio">
+            <h2>Ons Portfolio</h2>
+            <div class="website-grid">
+                <div class="website-item">
+                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/')">Bekijk Website 1</button>
+                    <button class="detail-button" onclick="showDetails('Website 1')">Details</button>
+                </div>
+                <div class="website-item">
+                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/mobil.html')">Bekijk Website 2</button>
+                    <button class="detail-button" onclick="showDetails('Website 2')">Details</button>
+                </div>
+                <div class="website-item">
+                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/index.html1.html')">Bekijk Website 3</button>
+                    <button class="detail-button" onclick="showDetails('Website 3')">Details</button>
+                </div>
+            </div>
+            <div id="iframe-container">
+                <iframe src="" id="portfolio-iframe" title="Portfolio Website"></iframe>
+            </div>
+            <div id="website-details" class="website-details"></div>
+        </div>
+
+        <fieldset style="border: 2px solid #007BFF; border-radius: 10px; padding: 20px; margin: 20px auto; max-width: 600px; background-color: #fff;">
+            <legend style="font-weight: bold; color: #007BFF;">Contact opnemen</legend>
+            <p>Heb je vragen of opmerkingen? Neem contact met ons op via e-mail:</p>
+            <a href="mailto:Ambex.NL@outlook.com" style="color: #007BFF; text-decoration: none; font-weight: bold;">Ambex.NL@outlook.com</a>
+        </fieldset>
         
-    </div>
 
-    <!-- Navigatiebalk -->
-    <div class="nav">
-        <a href="#home">Home</a>
-        <a href="#over-ons">Over Ons</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Info</a>
-    </div>
-
-    <!-- Welkomsttekst -->
-    <div class="section" id="home">
-        <h1>Welkom bij Ambex</h1>
-        <p>Bij Ambex streven we naar perfectie en innovatie in alles wat we doen. Ontdek hoe wij de industrie transformeren met onze baanbrekende oplossingen en diensten.</p>
-    </div>
-
-    <!-- Over Ons -->
-    <div class="section" id="over-ons">
-        <h2>Over Ons</h2>
-        <p>Ambex is een toonaangevend bedrijf dat zich richt op het leveren van geavanceerde oplossingen en diensten. Wij zijn trots op onze innovatieve benadering en onze toewijding aan het bieden van kwaliteit. Onze teams zijn samengesteld uit deskundigen die zich inzetten om de beste resultaten te behalen voor onze klanten.</p>
-    </div>
-
-    <!-- Team -->
-    <div class="section" id="team">
-        <h2>Ons Team</h2>
-        <p><strong>Powered by Ambex</strong></p>
-        <p>Ons team bestaat uit gepassioneerde professionals met expertise op verschillende gebieden. Wij werken samen om de hoogste normen van kwaliteit en klanttevredenheid te waarborgen. Ontdek meer over onze experts en hun bijdragen aan ons succes.</p>
-    </div>
-
-    <!-- Boekingsbeleid -->
-    <div class="section" id="booking-policy">
-        <h2>Boekingsbeleid</h2>
-        <button class="btn booking-policy-button">Bekijk Boekingsbeleid</button>
-        <div class="booking-policy-content">
-            <p>Bij Ambex hebben we duidelijke richtlijnen voor boekingen en afspraken:</p>
-            <ul>
-                <li>Annuleringen moeten minimaal 24 uur van tevoren worden doorgegeven.</li>
-                <li>Te laat komen kan resulteren in een verkorte service tijd.</li>
-                <li>Het niet annuleren zonder kennisgeving kan leiden tot kosten.</li>
-                <li>Voor groepen kan een aanbetaling vereist zijn.</li>
-            </ul>
-            <p>Als je zonder annulering niet op je afspraak verschijnt, wordt 50% van het bedrag in rekening gebracht en kun je geen verdere afspraken maken. Annuleringen moeten minimaal 24 uur van tevoren worden doorgegeven om je aanbetaling over te zetten naar een volgende afspraak. Nieuwe klanten moeten bij het maken van de eerste afspraak een niet-terugbetaalbare aanbetaling van €15 betalen. Er worden extra kosten van €5 gerekend als je meer dan 10 minuten te laat bent, met annulering en overzetting van de aanbetaling bij 20 minuten vertraging. Het is belangrijk om vooraf je wensen door te sturen en aan te geven als je iemand wilt meenemen, waarbij maximaal één persoon mee kan tijdens de afspraak.</p>
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; Ambex. Alle rechten voorbehouden.</p>
         </div>
-    </div>
-
-    <!-- Algemene Voorwaarden -->
-    <div class="section" id="terms">
-        <button class="btn" id="toggleTerms">Toon Algemene Voorwaarden</button>
-        <div class="terms-content" id="terms-content">
-            <p>Bij het boeken van een afspraak bij Ambex ga je akkoord met de volgende voorwaarden:</p>
-            <h2>1. Afspraken & Annuleringen</h2>
-            <ul>
-                <li>Annuleren moet minimaal 24 uur vooraf, anders wordt 50% van het bedrag in rekening gebracht.</li>
-                <li>Bij no-show wordt 50% van het bedrag in rekening gebracht en kan je toekomstige afspraken worden geweigerd.</li>
-            </ul>
-            <h2>2. Aanbetaling</h2>
-            <p>Nieuwe klanten betalen €15 aan bij de eerste afspraak; niet-restitueerbaar en aftrekbaar van de totaalprijs.</p>
-            <h2>3. Vertragingen</h2>
-            <ul>
-                <li>Bij meer dan 10 minuten te laat: extra kosten van €5. Bij 20 minuten of meer: afspraak geannuleerd, aanbetaling overzetbaar naar nieuwe afspraak.</li>
-            </ul>
-            <h2>4. Begeleiders</h2>
-            <p>Wil je iemand meenemen? Meld dit vooraf. Maximaal één persoon toegestaan.</p>
-            <h2>5. Voorbereiding</h2>
-            <p>Stuur je wensen vooraf om beschikbaarheid en prijs te checken.</p>
-            <h2>6. Wijzigingen</h2>
-            <p>Wijzigingen in de voorwaarden worden vooraf bekendgemaakt.</p>
-            <h2>7. Contact</h2>
-            <p>Vragen? Neem contact op via [contactinformatie].</p>
-            <button class="btn" id="closeTerms">Sluit Algemene Voorwaarden</button>
-        </div>
-    </div>
-
-    <!-- Contact / Adres -->
-    <div class="section" id="contact">
-        <h2>Contact / Adres</h2>
-        <p>Voor afspraken en vragen kunt u eenvoudig contact met ons opnemen via de bovenstaande methoden. Wij staan klaar om u te helpen en te zorgen voor een geweldige ervaring bij Ambex.</p> 
-        <br>
-      
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; Ambex. Alle rechten voorbehouden.</p>
-        
     </div>
 
     <!-- Scripts -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Algemene Voorwaarden Toggle
-            document.querySelector('#toggleTerms').addEventListener('click', function() {
-                document.querySelector('#terms-content').classList.toggle('open');
-            });
-
-            document.querySelector('#closeTerms').addEventListener('click', function() {
-                document.querySelector('#terms-content').classList.remove('open');
-                // Scroll een beetje omhoog naar het zichtbare gebied
-                scrollToVisible();
-            });
-
-            // Booking Policy Toggle
-            document.querySelector('.booking-policy-button').addEventListener('click', function() {
-                document.querySelector('.booking-policy-content').classList.toggle('open');
-            });
-
-            // Functie om een beetje omhoog te scrollen
-            function scrollToVisible() {
-                const termsContent = document.querySelector('#terms-content');
-                const rect = termsContent.getBoundingClientRect();
-                const offset = rect.top + window.pageYOffset - 100; // Scroll 100px omhoog
-
-                window.scrollTo({
-                    top: offset,
-                    behavior: 'smooth'
-                });
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }, 3000);
         });
+
+        function loadWebsite(url) {
+            document.getElementById('portfolio-iframe').src = url;
+        }
+
+        function showDetails(website) {
+            let detailsText = '';
+            switch (website) {
+                case 'Website 1':
+                    detailsText = 'Website 1 is een project dat is ontwikkeld door Ambex. Het is ontworpen om de elegantie van Viviana\'s Nail Glam te presenteren.';
+                    break;
+                case 'Website 2':
+                    detailsText = 'Website 2 biedt een mobielvriendelijke versie van de website, gemaakt door Ambex voor optimale prestaties op smartphones.';
+                    break;
+                case 'Website 3':
+                    detailsText = 'Website 3 is een aangepaste pagina die Ambex heeft ontwikkeld met unieke ontwerpkenmerken en functionaliteit.';
+                    break;
+                default:
+                    detailsText = 'Selecteer een website voor meer informatie.';
+            }
+            document.getElementById('website-details').innerText = detailsText;
+        }
     </script>
+
 </body>
 </html>
