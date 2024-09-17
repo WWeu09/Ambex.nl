@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambex Loader en Intro</title>
+    <title>Ambex</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
         /* Basis styling */
@@ -200,6 +200,43 @@
             max-width: 800px;
             margin: 20px auto;
         }
+
+        /* Form styling */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
@@ -247,7 +284,7 @@
             <p>Voor afspraken en vragen kunt u eenvoudig contact met ons opnemen via de bovenstaande methoden. Wij staan klaar om u te helpen en te zorgen voor een geweldige ervaring bij Ambex.</p> 
         </div>
 
-        <!-- Portfolio / Website Grid -->
+       <!-- Portfolio / Website Grid -->
         <div class="section" id="portfolio">
             <h2>Ons Portfolio</h2>
             <div class="website-grid">
@@ -264,6 +301,7 @@
                     <button class="detail-button" onclick="showDetails('Website 3')">Details</button>
                 </div>
             </div>
+
             <div id="iframe-container">
                 <iframe src="" id="portfolio-iframe" title="Portfolio Website"></iframe>
             </div>
@@ -275,7 +313,48 @@
             <p>Heb je vragen of opmerkingen? Neem contact met ons op via e-mail:</p>
             <a href="mailto:Ambex.NL@outlook.com" style="color: #007BFF; text-decoration: none; font-weight: bold;">Ambex.NL@outlook.com</a>
         </fieldset>
-        
+
+        <!-- Website Aanvraag Formulier -->
+        <div class="section">
+            <h1>Website Aanvraag Formulier</h1>
+            <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
+                <label for="name">Naam:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="website-type">Type Website:</label>
+                <select id="website-type" name="website-type">
+                    <option value="e-commerce">E-commerce</option>
+                    <option value="blog">Blog</option>
+                    <option value="portfolio">Portfolio</option>
+                    <option value="diensten">Diensten</option>
+                    <option value="overig">Overig</option>
+                </select>
+
+                <label for="features">Gewenste functies:</label>
+                <input type="checkbox" id="webshop" name="features" value="webshop">
+                <label for="webshop">Webshop</label>
+                <input type="checkbox" id="blog" name="features" value="blog">
+                <label for="blog">Blog</label>
+                <input type="checkbox" id="portfolio" name="features" value="portfolio">
+                <label for="portfolio">Portfolio</label>
+                <input type="checkbox" id="contact-form" name="features" value="contact-form">
+                <label for="contact-form">Contactformulier</label>
+
+                <label for="budget">Budget (optioneel):</label>
+                <input type="text" id="budget" name="budget">
+
+                <label for="deadline">Gewenste opleverdatum:</label>
+                <input type="date" id="deadline" name="deadline">
+
+                <label for="comments">Aanvullende opmerkingen:</label>
+                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+
+                <input type="submit" value="Verstuur">
+            </form>
+        </div>
 
         <!-- Footer -->
         <div class="footer">
