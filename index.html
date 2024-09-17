@@ -237,6 +237,28 @@
         form input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        /* Stijl voor knoppen in portfolio */
+.website-item button {
+    display: block;
+    margin: 10px auto;
+}
+
+/* Hover effect voor knoppen */
+.glow-on-hover, .detail-button {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover, .detail-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.glow-on-hover:active, .detail-button:active {
+    transform: scale(0.95);
+}
+
+
     </style>
 </head>
 <body>
@@ -302,6 +324,7 @@
                 </div>
             </div>
 
+
             <div id="iframe-container">
                 <iframe src="" id="portfolio-iframe" title="Portfolio Website"></iframe>
             </div>
@@ -314,10 +337,10 @@
             <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
                 <label for="name">Naam:</label>
                 <input type="text" id="name" name="name" required>
-
+            
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
-
+            
                 <label for="website-type">Type Website:</label>
                 <select id="website-type" name="website-type">
                     <option value="e-commerce">E-commerce</option>
@@ -326,8 +349,8 @@
                     <option value="diensten">Diensten</option>
                     <option value="overig">Overig</option>
                 </select>
-
-                <label for="features">Gewenste functies:</label>
+            
+                <label>Gewenste functies:</label>
                 <input type="checkbox" id="webshop" name="features" value="webshop">
                 <label for="webshop">Webshop</label>
                 <input type="checkbox" id="blog" name="features" value="blog">
@@ -336,18 +359,19 @@
                 <label for="portfolio">Portfolio</label>
                 <input type="checkbox" id="contact-form" name="features" value="contact-form">
                 <label for="contact-form">Contactformulier</label>
-
+            
                 <label for="budget">Budget (optioneel):</label>
                 <input type="text" id="budget" name="budget">
-
+            
                 <label for="deadline">Gewenste opleverdatum:</label>
                 <input type="date" id="deadline" name="deadline">
-
+            
                 <label for="comments">Aanvullende opmerkingen:</label>
                 <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-
+            
                 <input type="submit" value="Verstuur">
             </form>
+            
         </div>
 
         
@@ -363,38 +387,118 @@
             <p>&copy; Ambex. Alle rechten voorbehouden.</p>
         </div>
     </div>
+<!-- Scripts -->
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Voorkomt standaard formulier verzenden
+
+        // Verzamelen van formulierdata
+        let formData = new FormData(this);
+        let data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            websiteType: formData.get('website-type'),
+            features: formData.getAll('features'), // Verkrijgt alle geselecteerde features
+            budget: formData.get('budget'),
+            deadline: formData.get('deadline'),
+            comments: formData.get('comments')
+        };
+
+        // Voorbeeld: Print gegevens naar console
+        console.log(data);
+
+        // Hier zou je de gegevens kunnen verzenden naar een server
+        // Bijvoorbeeld met fetch API:
+        /*
+        fetch('je-server-endpoint', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => response.json()).then(result => {
+            console.log(result);
+            // Hier kun je een bevestigingsbericht tonen of andere acties uitvoeren
+        }).catch(error => {
+            console.error(error);
+            // Hier kun je een foutmelding tonen
+        });
+        */
+    });
+
+    window.onload = () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 3000); // 3 seconden vertraging
+    };
+
+    function loadWebsite(url) {
+        document.getElementById('portfolio-iframe').src = url;
+    }
+
+    function showDetails(website) {
+        document.getElementById('website-details').innerHTML = `<h3>Details van ${website}</h3><p>Hier kunnen meer details over ${website} worden weergegeven.</p>`;
+    }
 
     <!-- Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('content').style.display = 'block';
-            }, 3000);
-        });
 
-        function loadWebsite(url) {
-            document.getElementById('portfolio-iframe').src = url;
-        }
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault(); // Voorkomt standaard formulier verzenden
 
-        function showDetails(website) {
-            let detailsText = '';
-            switch (website) {
-                case 'Website 1':
-                    detailsText = 'Website 1 is een project dat is ontwikkeld door Ambex. Het is ontworpen om de elegantie van Viviana\'s Nail Glam te presenteren.';
-                    break;
-                case 'Website 2':
-                    detailsText = 'Website 2 biedt een mobielvriendelijke versie van de website, gemaakt door Ambex voor optimale prestaties op smartphones.';
-                    break;
-                case 'Website 3':
-                    detailsText = 'Website 3 is een aangepaste pagina die Ambex heeft ontwikkeld met unieke ontwerpkenmerken en functionaliteit.';
-                    break;
-                default:
-                    detailsText = 'Selecteer een website voor meer informatie.';
+        // Verzamelen van formulierdata
+        let formData = new FormData(this);
+        let data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            websiteType: formData.get('website-type'),
+            features: formData.getAll('features'), // Verkrijgt alle geselecteerde features
+            budget: formData.get('budget'),
+            deadline: formData.get('deadline'),
+            comments: formData.get('comments')
+        };
+
+        // Voorbeeld: Print gegevens naar console
+        console.log(data);
+
+        // Hier zou je de gegevens kunnen verzenden naar een server
+        // Bijvoorbeeld met fetch API:
+        /*
+        fetch('je-server-endpoint', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
             }
-            document.getElementById('website-details').innerText = detailsText;
-        }
-    </script>
+        }).then(response => response.json()).then(result => {
+            console.log(result);
+            // Hier kun je een bevestigingsbericht tonen of andere acties uitvoeren
+        }).catch(error => {
+            console.error(error);
+            // Hier kun je een foutmelding tonen
+        });
+        */
+    });
+
+    window.onload = () => {
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 3000); // 3 seconden vertraging
+    };
+
+    function loadWebsite(url) {
+        document.getElementById('portfolio-iframe').src = url;
+    }
+
+    function showDetails(website) {
+        document.getElementById('website-details').innerHTML = `<h3>Details van ${website}</h3><p>Hier kunnen meer details over ${website} worden weergegeven.</p>`;
+    }
+
+
+
+</script>
+
 
 </body>
 </html>
