@@ -14,30 +14,7 @@
             background-color: #f0f0f0;
             font-family: Arial, sans-serif;
         }
-
-        /* Loader container */
-        #loader {
-            position: absolute;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000000;
-            z-index: 10;
-            background-image: url('2.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            animation: fadeOut 3s forwards;
-        }
-
-        /* Verberg de rest van de inhoud tijdens het laden */
-        #content {
-            display: none;
-            padding-top: 60px;
-        }
-
+    
         /* Stijl voor de navigatiebalk */
         .nav {
             position: fixed;
@@ -51,7 +28,7 @@
             width: 100%;
             max-width: 1200px;
         }
-
+    
         .nav a {
             color: #007BFF;
             text-decoration: none;
@@ -59,7 +36,7 @@
             margin: 0 10px;
             font-weight: bold;
         }
-
+    
         /* Welkomsttekst en inhoud */
         .section {
             padding: 20px;
@@ -67,7 +44,7 @@
             background-color: #fff;
             margin: 20px;
         }
-
+    
         /* Raster layout voor de websites */
         .website-grid {
             display: grid;
@@ -76,7 +53,7 @@
             margin: 20px;
             padding: 20px;
         }
-
+    
         /* Glow Button */
         .glow-on-hover {
             width: 220px;
@@ -90,7 +67,7 @@
             z-index: 0;
             border-radius: 10px;
         }
-
+    
         .glow-on-hover:before {
             content: '';
             background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
@@ -107,15 +84,15 @@
             transition: opacity .3s ease-in-out;
             border-radius: 10px;
         }
-
+    
         .glow-on-hover:active {
             color: #000;
         }
-
+    
         .glow-on-hover:hover:before {
             opacity: 1;
         }
-
+    
         .glow-on-hover:after {
             z-index: -1;
             content: '';
@@ -127,26 +104,26 @@
             top: 0;
             border-radius: 10px;
         }
-
+    
         @keyframes glowing {
             0% { background-position: 0 0; }
             50% { background-position: 400% 0; }
             100% { background-position: 0 0; }
         }
-
+    
         /* Stijl voor de iframe */
         #iframe-container {
             margin: 20px;
             text-align: center;
         }
-
+    
         iframe {
             width: 80%;
             height: 500px;
             border: 1px solid #ccc;
             border-radius: 15px;
         }
-
+    
         /* Footer */
         .footer {
             background-color: #fff;
@@ -154,12 +131,12 @@
             text-align: center;
             box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
         }
-
+    
         .footer p {
             font-size: 14px;
             color: #666;
         }
-
+    
         /* Fade out animation */
         @keyframes fadeOut {
             from {
@@ -170,7 +147,7 @@
                 display: none; /* Verbergt de loader na de fade-out */
             }
         }
-
+    
         /* Detail Button */
         .detail-button {
             width: 100px;
@@ -184,11 +161,11 @@
             margin: 5px 0;
             transition: background-color 0.3s ease;
         }
-
+    
         .detail-button:hover {
             background-color: #0056b3;
         }
-
+    
         /* Details section */
         .website-details {
             margin-top: 20px;
@@ -200,7 +177,7 @@
             max-width: 800px;
             margin: 20px auto;
         }
-
+    
         /* Form styling */
         form {
             background-color: #fff;
@@ -210,13 +187,13 @@
             max-width: 600px;
             margin: 20px auto;
         }
-
+    
         form label {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
         }
-
+    
         form input, form select, form textarea {
             width: 100%;
             padding: 10px;
@@ -224,7 +201,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-
+    
         form input[type="submit"] {
             background-color: #007BFF;
             color: #fff;
@@ -233,45 +210,110 @@
             padding: 15px;
             border-radius: 5px;
         }
-
+    
         form input[type="submit"]:hover {
             background-color: #0056b3;
         }
-
+    
         /* Stijl voor knoppen in portfolio */
-.website-item button {
-    display: block;
-    margin: 10px auto;
-}
+        .website-item button {
+            display: block;
+            margin: 10px auto;
+        }
+    
+        /* Hover effect voor knoppen */
+        .glow-on-hover, .detail-button {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .glow-on-hover:hover, .detail-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+        }
+    
+        .glow-on-hover:active, .detail-button:active {
+            transform: scale(0.95);
+        }
+    
 
-/* Hover effect voor knoppen */
-.glow-on-hover, .detail-button {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
 
-.glow-on-hover:hover, .detail-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-}
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
 
-.glow-on-hover:active, .detail-button:active {
-    transform: scale(0.95);
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        #main {
+            transition: margin-left 0.5s;
+            padding: 16px;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+
+        .sidenav {
+  z-index: 9999;
 }
 
 
     </style>
+    
 </head>
 <body>
 
-    <!-- Loader Section -->
-    <div id="loader"></div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+      
+      <div id="main">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+      </div>
+      
+
 
     <!-- Rest van de inhoud -->
     <div id="content">
         <!-- Navigatiebalk -->
         <div class="nav">
             <a href="#home">Home</a>
-            <a href="#over-ons">Over Ons</a>
+            <a href="#over-ons">Profiel</a>
             <a href="#team">Team</a>
             <a href="#contact">Info</a>
             <a href="#portfolio">Portfolio</a>
@@ -307,72 +349,108 @@
         </div>
 
        <!-- Portfolio / Website Grid -->
-        <div class="section" id="portfolio">
-            <h2>Ons Portfolio</h2>
-            <div class="website-grid">
-                <div class="website-item">
-                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/')">Bekijk Website 1</button>
-                    <button class="detail-button" onclick="showDetails('Website 1')">Details</button>
-                </div>
-                <div class="website-item">
-                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/mobil.html')">Bekijk Website 2</button>
-                    <button class="detail-button" onclick="showDetails('Website 2')">Details</button>
-                </div>
-                <div class="website-item">
-                    <button class="glow-on-hover" onclick="loadWebsite('https://wweu09.github.io/Vivianas-Nail-Glam/index.html1.html')">Bekijk Website 3</button>
-                    <button class="detail-button" onclick="showDetails('Website 3')">Details</button>
-                </div>
-            </div>
-
-
-            <div id="iframe-container">
-                <iframe src="" id="portfolio-iframe" title="Portfolio Website"></iframe>
-            </div>
-            <div id="website-details" class="website-details"></div>
+<div class="section" id="portfolio">
+    <h2>Ons Portfolio</h2>
+    <div class="website-grid">
+        <div class="website-item">
+            <button class="glow-on-hover" onclick="loadWebsite(http://prismatikai.com/')">Bekijk Website 1</button>
+            <button class="detail-button" onclick="showDetails('Website 1')">Details</button>
         </div>
-
-        <!-- Website Aanvraag Formulier -->
-        <div class="section">
-            <h1>Website Aanvraag Formulier</h1>
-            <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
-                <label for="name">Naam:</label>
-                <input type="text" id="name" name="name" required>
-            
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required>
-            
-                <label for="website-type">Type Website:</label>
-                <select id="website-type" name="website-type">
-                    <option value="e-commerce">E-commerce</option>
-                    <option value="blog">Blog</option>
-                    <option value="portfolio">Portfolio</option>
-                    <option value="diensten">Diensten</option>
-                    <option value="overig">Overig</option>
-                </select>
-            
-                <label>Gewenste functies:</label>
-                <input type="checkbox" id="webshop" name="features" value="webshop">
-                <label for="webshop">Webshop</label>
-                <input type="checkbox" id="blog" name="features" value="blog">
-                <label for="blog">Blog</label>
-                <input type="checkbox" id="portfolio" name="features" value="portfolio">
-                <label for="portfolio">Portfolio</label>
-                <input type="checkbox" id="contact-form" name="features" value="contact-form">
-                <label for="contact-form">Contactformulier</label>
-            
-                <label for="budget">Budget (optioneel):</label>
-                <input type="text" id="budget" name="budget">
-            
-                <label for="deadline">Gewenste opleverdatum:</label>
-                <input type="date" id="deadline" name="deadline">
-            
-                <label for="comments">Aanvullende opmerkingen:</label>
-                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-            
-                <input type="submit" value="Verstuur">
-            </form>
-            
+        <div class="website-item">
+            <button class="glow-on-hover" onclick="loadWebsite('https://vivianasnailglam.nl/')">Bekijk Website 2</button>
+            <button class="detail-button" onclick="showDetails('Website 2')">Details</button>
         </div>
+        <div class="website-item">
+            <button class="glow-on-hover" onclick="loadWebsite('https://ambex.nl')">Bekijk Website 3</button>
+            <button class="detail-button" onclick="showDetails('Website 3')">Details</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+     <!-- Website Aanvraag Formulier -->
+<div class="section">
+    <h1>Website Aanvraag Formulier</h1>
+    <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
+        <!-- Bedrijfsinformatie -->
+        <label for="business-name">Bedrijfsnaam:</label>
+        <input type="text" id="business-name" name="business-name" required>
+
+        <label for="business-type">Wat voor soort zaak heb je?</label>
+        <input type="text" id="business-type" name="business-type" required>
+
+        <label for="has-website">Heb je al een website?</label>
+        <select id="has-website" name="has-website">
+            <option value="ja">Ja</option>
+            <option value="nee">Nee</option>
+        </select>
+
+        <!-- Website Behoeften -->
+        <label for="website-type">Wat voor soort website wil je?</label>
+        <select id="website-type" name="website-type">
+            <option value="e-commerce">E-commerce</option>
+            <option value="blog">Blog</option>
+            <option value="portfolio">Portfolio</option>
+            <option value="diensten">Diensten</option>
+            <option value="overig">Overig</option>
+        </select>
+
+        <label for="website-goal">Wat is het doel van je website?</label>
+        <input type="text" id="website-goal" name="website-goal" required>
+
+        <label>Gewenste functies:</label>
+        <input type="checkbox" id="webshop" name="features" value="webshop">
+        <label for="webshop">Webshop</label>
+        <input type="checkbox" id="blog" name="features" value="blog">
+        <label for="blog">Blog</label>
+        <input type="checkbox" id="contact-form" name="features" value="contact-form">
+        <label for="contact-form">Contactformulier</label>
+        <input type="checkbox" id="appointments" name="features" value="online-appointments">
+        <label for="appointments">Online afspraak maken</label>
+
+        <!-- Design en Branding -->
+        <label for="has-logo">Heb je al een logo of branding?</label>
+        <select id="has-logo" name="has-logo">
+            <option value="ja">Ja</option>
+            <option value="nee">Nee</option>
+        </select>
+
+        <label for="design-preferences">Heb je een bepaalde stijl of kleuren?</label>
+        <textarea id="design-preferences" name="design-preferences" rows="4" cols="50"></textarea>
+
+        <!-- Domein en Hosting -->
+        <label for="has-domain">Heb je al een domeinnaam?</label>
+        <select id="has-domain" name="has-domain">
+            <option value="ja">Ja</option>
+            <option value="nee">Nee</option>
+        </select>
+
+        <label for="domain-name">Domeinnaam (indien van toepassing):</label>
+        <input type="text" id="domain-name" name="domain-name">
+
+        <label for="has-hosting">Heb je al hosting voor je website?</label>
+        <select id="has-hosting" name="has-hosting">
+            <option value="ja">Ja</option>
+            <option value="nee">Nee</option>
+        </select>
+
+        <!-- Deadline en Budget -->
+        <label for="budget">Wat is je geschatte budget?</label>
+        <input type="text" id="budget" name="budget">
+
+        <label for="deadline">Gewenste opleverdatum:</label>
+        <input type="date" id="deadline" name="deadline">
+
+        <!-- Aanvullende opmerkingen -->
+        <label for="comments">Aanvullende opmerkingen:</label>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+
+        <input type="submit" value="Verstuur">
+    </form>
+</div>
+
 
         
         <fieldset style="border: 2px solid #007BFF; border-radius: 10px; padding: 20px; margin: 20px auto; max-width: 600px; background-color: #fff;">
@@ -494,8 +572,17 @@
     function showDetails(website) {
         document.getElementById('website-details').innerHTML = `<h3>Details van ${website}</h3><p>Hier kunnen meer details over ${website} worden weergegeven.</p>`;
     }
+    function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
 
-
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.body.style.backgroundColor = "white";
+}
 
 </script>
 
