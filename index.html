@@ -8,13 +8,12 @@
     <style>
         /* Basis styling */
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-    
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+   
         /* Stijl voor de navigatiebalk */
         .nav {
             position: fixed;
@@ -236,76 +235,56 @@
         }
     
 
-        .sidenav {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidenav a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidenav .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        #main {
-            transition: margin-left 0.5s;
-            padding: 16px;
-        }
-
-        @media screen and (max-height: 450px) {
-            .sidenav {
-                padding-top: 15px;
-            }
-            .sidenav a {
-                font-size: 18px;
-            }
-        }
-
-        .sidenav {
-  z-index: 9999;
+      .clients {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
 }
 
+.client {
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    padding: 10px;
+    margin: 0 15px;
+}
+
+.client a {
+    text-decoration: none;
+    font-size: 20px;
+    color: #000;
+    display: inline-block;
+    padding: 10px;
+}
+
+.client a:hover {
+    color: #ff4081;
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+    transform: translateX(10px);
+}
+.slider {
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.slider img {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.slider img.active {
+    display: block;
+}
 
     </style>
     
 </head>
 <body>
 
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-      </div>
-      
-      <div id="main">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-      </div>
-      
+  
 
 
     <!-- Rest van de inhoud -->
@@ -348,108 +327,112 @@
             <p>Voor afspraken en vragen kunt u eenvoudig contact met ons opnemen via de bovenstaande methoden. Wij staan klaar om u te helpen en te zorgen voor een geweldige ervaring bij Ambex.</p> 
         </div>
 
-       <!-- Portfolio / Website Grid -->
+<!-- Portfolio / Website Grid -->
 <div class="section" id="portfolio">
     <h2>Ons Portfolio</h2>
-    <div class="website-grid">
-        <div class="website-item">
-            <button class="glow-on-hover" onclick="loadWebsite(http://prismatikai.com/')">Bekijk Website 1</button>
-            <button class="detail-button" onclick="showDetails('Website 1')">Details</button>
+   <details><p>Dubbel klik om de website te openen.</p></details>
+    <div class="clients">
+        <div class="client">
+            <a href="https://www.vivianasnailglam.nl" class="client-link" data-image="vivianasnailglam.png">VivianasNailGlam.nl</a>
         </div>
-        <div class="website-item">
-            <button class="glow-on-hover" onclick="loadWebsite('https://vivianasnailglam.nl/')">Bekijk Website 2</button>
-            <button class="detail-button" onclick="showDetails('Website 2')">Details</button>
+        <div class="client">
+            <a href="http://prismatikai.com/" class="client-link" data-image="prismatik.canva.png">Prismatikai.com</a>
         </div>
-        <div class="website-item">
-            <button class="glow-on-hover" onclick="loadWebsite('https://ambex.nl')">Bekijk Website 3</button>
-            <button class="detail-button" onclick="showDetails('Website 3')">Details</button>
+        <div class="client">
+            <a href="https://www.raflelargent.com" class="client-link" data-image="raflelargent.jpg">RafleLArgent.com</a>
         </div>
+    </div>
+
+    <div class="slider">
+        <img src="vivianasnailglam.png" class="active" alt="VivianasNailGlam">
+        <img src="prismatik.canva.png" alt="Prismatikai">
+        <img src="raflelargent.jpg" alt="RafleLArgent"> <!-- Corrected image for RafleLArgent -->
     </div>
 </div>
 
 
 
-
-     <!-- Website Aanvraag Formulier -->
+    <!-- Website Aanvraag Formulier -->
 <div class="section">
-    <h1>Website Aanvraag Formulier</h1>
-    <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
-        <!-- Bedrijfsinformatie -->
-        <label for="business-name">Bedrijfsnaam:</label>
-        <input type="text" id="business-name" name="business-name" required>
+   <h1>Website Aanvraag Formulier</h1>
+   <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
+       <!-- Bedrijfsinformatie -->
+       <label for="business-name">Bedrijfsnaam:</label>
+       <input type="text" id="business-name" name="business-name" required>
 
-        <label for="business-type">Wat voor soort zaak heb je?</label>
-        <input type="text" id="business-type" name="business-type" required>
+       <label for="business-type">Wat voor soort zaak heb je?</label>
+       <input type="text" id="business-type" name="business-type" required>
 
-        <label for="has-website">Heb je al een website?</label>
-        <select id="has-website" name="has-website">
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
-        </select>
+       <label for="has-website">Heb je al een website?</label>
+       <select id="has-website" name="has-website">
+           <option value="ja">Ja</option>
+           <option value="nee">Nee</option>
+       </select>
 
-        <!-- Website Behoeften -->
-        <label for="website-type">Wat voor soort website wil je?</label>
-        <select id="website-type" name="website-type">
-            <option value="e-commerce">E-commerce</option>
-            <option value="blog">Blog</option>
-            <option value="portfolio">Portfolio</option>
-            <option value="diensten">Diensten</option>
-            <option value="overig">Overig</option>
-        </select>
+       <!-- Website Behoeften -->
+       <label for="website-type">Wat voor soort website wil je?</label>
+       <select id="website-type" name="website-type">
+           <option value="e-commerce">E-commerce</option>
+           <option value="blog">Blog</option>
+           <option value="portfolio">Portfolio</option>
+           <option value="diensten">Diensten</option>
+           <option value="overig">Overig</option>
+       </select>
 
-        <label for="website-goal">Wat is het doel van je website?</label>
-        <input type="text" id="website-goal" name="website-goal" required>
+       <label for="website-goal">Wat is het doel van je website?</label>
+       <input type="text" id="website-goal" name="website-goal" required>
 
-        <label>Gewenste functies:</label>
-        <input type="checkbox" id="webshop" name="features" value="webshop">
-        <label for="webshop">Webshop</label>
-        <input type="checkbox" id="blog" name="features" value="blog">
-        <label for="blog">Blog</label>
-        <input type="checkbox" id="contact-form" name="features" value="contact-form">
-        <label for="contact-form">Contactformulier</label>
-        <input type="checkbox" id="appointments" name="features" value="online-appointments">
-        <label for="appointments">Online afspraak maken</label>
+       <label>Gewenste functies:</label>
+       <input type="checkbox" id="webshop" name="features" value="webshop">
+       <label for="webshop">Webshop</label>
+       <input type="checkbox" id="blog" name="features" value="blog">
+       <label for="blog">Blog</label>
+       <input type="checkbox" id="contact-form" name="features" value="contact-form">
+       <label for="contact-form">Contactformulier</label>
+       <input type="checkbox" id="appointments" name="features" value="online-appointments">
+       <label for="appointments">Online afspraak maken</label>
 
-        <!-- Design en Branding -->
-        <label for="has-logo">Heb je al een logo of branding?</label>
-        <select id="has-logo" name="has-logo">
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
-        </select>
+       <!-- Design en Branding -->
+       <label for="has-logo">Heb je al een logo of branding?</label>
+       <select id="has-logo" name="has-logo">
+           <option value="ja">Ja</option>
+           <option value="nee">Nee</option>
+       </select>
 
-        <label for="design-preferences">Heb je een bepaalde stijl of kleuren?</label>
-        <textarea id="design-preferences" name="design-preferences" rows="4" cols="50"></textarea>
+       <label for="design-preferences">Heb je een bepaalde stijl of kleuren?</label>
+       <textarea id="design-preferences" name="design-preferences" rows="4" cols="50"></textarea>
 
-        <!-- Domein en Hosting -->
-        <label for="has-domain">Heb je al een domeinnaam?</label>
-        <select id="has-domain" name="has-domain">
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
-        </select>
+       <!-- Domein en Hosting -->
+       <label for="has-domain">Heb je al een domeinnaam?</label>
+       <select id="has-domain" name="has-domain">
+           <option value="ja">Ja</option>
+           <option value="nee">Nee</option>
+       </select>
 
-        <label for="domain-name">Domeinnaam (indien van toepassing):</label>
-        <input type="text" id="domain-name" name="domain-name">
+       <label for="domain-name">Domeinnaam (indien van toepassing):</label>
+       <input type="text" id="domain-name" name="domain-name">
 
-        <label for="has-hosting">Heb je al hosting voor je website?</label>
-        <select id="has-hosting" name="has-hosting">
-            <option value="ja">Ja</option>
-            <option value="nee">Nee</option>
-        </select>
+       <label for="has-hosting">Heb je al hosting voor je website?</label>
+       <select id="has-hosting" name="has-hosting">
+           <option value="ja">Ja</option>
+           <option value="nee">Nee</option>
+       </select>
 
-        <!-- Deadline en Budget -->
-        <label for="budget">Wat is je geschatte budget?</label>
-        <input type="text" id="budget" name="budget">
+       <!-- Deadline en Budget -->
+       <label for="budget">Wat is je geschatte budget?</label>
+       <input type="text" id="budget" name="budget">
 
-        <label for="deadline">Gewenste opleverdatum:</label>
-        <input type="date" id="deadline" name="deadline">
+       <label for="deadline">Gewenste opleverdatum:</label>
+       <input type="date" id="deadline" name="deadline">
 
-        <!-- Aanvullende opmerkingen -->
-        <label for="comments">Aanvullende opmerkingen:</label>
-        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+       <!-- Aanvullende opmerkingen -->
+       <label for="comments">Aanvullende opmerkingen:</label>
+       <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
 
-        <input type="submit" value="Verstuur">
-    </form>
+       <input type="submit" value="Verstuur">
+   </form>
 </div>
+</fieldset>
 
 
         
@@ -558,31 +541,61 @@
         */
     });
 
-    window.onload = () => {
-        setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-        }, 3000); // 3 seconden vertraging
-    };
+    
+    document.querySelectorAll('.client-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();  // voorkomt dat de link meteen opent
+        let imageSrc = this.getAttribute('data-image');
+        console.log("Afbeelding geselecteerd:", imageSrc);  // Debugging
+        document.querySelectorAll('.slider img').forEach(img => {
+            img.classList.remove('active');
+            if (img.getAttribute('src') === imageSrc) {
+                img.classList.add('active');
+                console.log("Afbeelding zichtbaar:", imageSrc);  // Debugging
+            }
+        });
+    });
 
-    function loadWebsite(url) {
-        document.getElementById('portfolio-iframe').src = url;
-    }
+    link.addEventListener('dblclick', function(e) {
+        e.preventDefault();  // voorkomt dat de link op dezelfde pagina opent
+        window.open(this.href, '_blank');  // opent de link in een nieuw tabblad
+    });
+});
 
-    function showDetails(website) {
-        document.getElementById('website-details').innerHTML = `<h3>Details van ${website}</h3><p>Hier kunnen meer details over ${website} worden weergegeven.</p>`;
-    }
-    function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
 
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-  document.body.style.backgroundColor = "white";
-}
+
+// Get all client links
+const clientLinks = document.querySelectorAll('.client-link');
+    const sliderImages = document.querySelectorAll('.slider img');
+
+    clientLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the default anchor behavior
+            const imageSrc = this.getAttribute('data-image'); // Get the image from data attribute
+
+            // Loop through all slider images and update the 'active' class
+            sliderImages.forEach(img => {
+                img.classList.remove('active'); // Remove 'active' from all
+                if (img.getAttribute('src') === imageSrc) {
+                    img.classList.add('active'); // Add 'active' to the matching image
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.view-image').forEach(button => {
+    button.addEventListener('click', function() {
+        const imageSrc = this.getAttribute('data-image');
+        const sliderImages = document.querySelectorAll('.slider img');
+        
+        sliderImages.forEach(img => {
+            img.classList.remove('active');
+            if (img.getAttribute('src') === imageSrc) {
+                img.classList.add('active');
+            }
+        });
+    });
+});
 
 </script>
 
