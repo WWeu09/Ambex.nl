@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ambex</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
     <style>
         /* Basis styling */
         body, html {
@@ -336,7 +337,7 @@
             <a href="https://www.vivianasnailglam.nl" class="client-link" data-image="vivianasnailglam.png">VivianasNailGlam.nl</a>
         </div>
         <div class="client">
-            <a href="http://prismatikai.com/" class="client-link" data-image="Prismatik.canva.png">Prismatikai.com</a>
+            <a href="http://prismatikai.com/" class="client-link" data-image="prismatik.canva.png">Prismatikai.com</a>
         </div>
         <div class="client">
             <a href="https://www.raflelargent.com" class="client-link" data-image="raflelargent.jpg">RafleLArgent.com</a>
@@ -345,11 +346,49 @@
 
     <div class="slider">
         <img src="vivianasnailglam.png" class="active" alt="VivianasNailGlam">
-        <img src="Prismatik.png" alt="Prismatikai">
+        <img src="prismatik.canva.png" alt="Prismatikai">
         <img src="raflelargent.jpg" alt="RafleLArgent"> <!-- Corrected image for RafleLArgent -->
     </div>
 </div>
+<style>
+    .clients {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column; /* Default: items under each other */
+        margin: 20px;
+        gap: 10px; /* Adds space between items */
+    }
 
+    .client {
+        text-align: center;
+        transition: transform 0.3s ease-in-out;
+        padding: 10px;
+        margin: 0 15px;
+    }
+
+    .client-link {
+        display: inline-block;
+        white-space: normal; /* Text wraps on multiple lines */
+        word-wrap: break-word; /* Break long words */
+        overflow-wrap: break-word; /* Ensures long words break nicely */
+    }
+
+    @media (min-width: 769px) {
+        .clients {
+            flex-direction: row; /* On larger screens, clients will be side by side */
+        }
+    }
+
+    @media (max-width: 768px) {
+        /* On smaller screens (mobile), the default column layout applies */
+        .client-link {
+            display: inline-block;
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    }
+</style>
 
 
     <!-- Website Aanvraag Formulier -->
