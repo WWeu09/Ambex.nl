@@ -3,641 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ambex</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="icon" href="favicon-16x16.png" sizes="16x16" type="image/png">
+    <title>Rafle L'argent</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <style>
-        /* Basis styling */
-        body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-   
-        /* Stijl voor de navigatiebalk */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            padding: 10px 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 20;
-            width: 100%;
-            max-width: 1200px;
+        /* Algemeen stijlen */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
         }
-    
-        .nav a {
-            color: #007BFF;
-            text-decoration: none;
-            padding: 10px;
-            margin: 0 10px;
-            font-weight: bold;
-        }
-    
-        /* Welkomsttekst en inhoud */
-        .section {
-            padding: 20px;
-            text-align: center;
-            background-color: #fff;
-            margin: 20px;
-        }
-    
-        /* Raster layout voor de websites */
-        .website-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 20px;
-            padding: 20px;
-        }
-    
-        /* Glow Button */
-        .glow-on-hover {
-            width: 220px;
-            height: 50px;
-            border: none;
-            outline: none;
-            color: #fff;
-            background: #111;
-            cursor: pointer;
-            position: relative;
-            z-index: 0;
-            border-radius: 10px;
-        }
-    
-        .glow-on-hover:before {
-            content: '';
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            background-size: 400%;
-            z-index: -1;
-            filter: blur(5px);
-            width: calc(100% + 4px);
-            height: calc(100% + 4px);
-            animation: glowing 20s linear infinite;
-            opacity: 0;
-            transition: opacity .3s ease-in-out;
-            border-radius: 10px;
-        }
-    
-        .glow-on-hover:active {
-            color: #000;
-        }
-    
-        .glow-on-hover:hover:before {
-            opacity: 1;
-        }
-    
-        .glow-on-hover:after {
-            z-index: -1;
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: #111;
-            left: 0;
-            top: 0;
-            border-radius: 10px;
-        }
-    
-        @keyframes glowing {
-            0% { background-position: 0 0; }
-            50% { background-position: 400% 0; }
-            100% { background-position: 0 0; }
-        }
-    
-        /* Stijl voor de iframe */
-        #iframe-container {
-            margin: 20px;
+
+        h1, h2 {
+            color: #333;
             text-align: center;
         }
-    
-        iframe {
-            width: 80%;
-            height: 500px;
-            border: 1px solid #ccc;
-            border-radius: 15px;
+
+        /* Stijl voor de afbeelding */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-    
-        /* Footer */
-        .footer {
-            background-color: #fff;
-            padding: 10px;
-            text-align: center;
-            box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
-        }
-    
-        .footer p {
-            font-size: 14px;
-            color: #666;
-        }
-    
-        /* Fade out animation */
-        @keyframes fadeOut {
-            from {
-                opacity: 1;
-            }
-            to {
-                opacity: 0;
-                display: none; /* Verbergt de loader na de fade-out */
-            }
-        }
-    
-        /* Detail Button */
-        .detail-button {
-            width: 100px;
-            height: 40px;
-            border: none;
-            outline: none;
-            color: #fff;
-            background: #007BFF;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 5px 0;
-            transition: background-color 0.3s ease;
-        }
-    
-        .detail-button:hover {
-            background-color: #0056b3;
-        }
-    
-        /* Details section */
-        .website-details {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-            max-width: 800px;
-            margin: 20px auto;
-        }
-    
-        /* Form styling */
+
+        /* Formulier stijlen */
         form {
             background-color: #fff;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
         }
-    
-        form label {
-            display: block;
-            margin-bottom: 5px;
+
+        label {
             font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #555;
         }
-    
-        form input, form select, form textarea {
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
             width: 100%;
             padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-    
-        form input[type="submit"] {
-            background-color: #007BFF;
-            color: #fff;
+            background-color: #4CAF50;
+            color: white;
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-            padding: 15px;
-            border-radius: 5px;
         }
-    
-        form input[type="submit"]:hover {
-            background-color: #0056b3;
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
-    
-        /* Stijl voor knoppen in portfolio */
-        .website-item button {
-            display: block;
-            margin: 10px auto;
+
+        /* Footer stijl */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
         }
-    
-        /* Hover effect voor knoppen */
-        .glow-on-hover, .detail-button {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin: 0 10px;
         }
-    
-        .glow-on-hover:hover, .detail-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+
+        footer a:hover {
+            text-decoration: underline;
         }
-    
-        .glow-on-hover:active, .detail-button:active {
-            transform: scale(0.95);
+
+        /* Footer powered by */
+        .powered-by {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
         }
-    
-
-      .clients {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px;
-}
-
-.client {
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    padding: 10px;
-    margin: 0 15px;
-}
-
-.client a {
-    text-decoration: none;
-    font-size: 20px;
-    color: #000;
-    display: inline-block;
-    padding: 10px;
-}
-
-.client a:hover {
-    color: #ff4081;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    transition: all 0.5s ease;
-    transform: translateX(10px);
-}
-.slider {
-    width: 100%;
-    max-width: 800px;
-    margin: 50px auto;
-}
-
-.slider img {
-    width: 100%;
-    height: auto;
-    display: none;
-}
-
-.slider img.active {
-    display: block;
-}
 
     </style>
-    
 </head>
 <body>
 
-  
+    <h1>Coming soon</h1>
+    <img src="raflelargent.jpg" alt="Foto van Ambex logo">
 
+    <!-- Sectie voor modellen -->
+    <h2>Wij zijn op zoek naar modellen!</h2>
+    <p>Ben jij geïnteresseerd in het modelleren voor Rafle L'argent? Vul het aanmeldformulier in!</p>
 
-    <!-- Rest van de inhoud -->
-    <div id="content">
-        <!-- Navigatiebalk -->
-        <div class="nav">
-            <a href="#home">Home</a>
-            <a href="#over-ons">Profiel</a>
-            <a href="#team">Team</a>
-            <a href="#contact">Info</a>
-            <a href="#portfolio">Portfolio</a>
+    <!-- Aanmeldformulier -->
+    <h2>Aanmeldformulier</h2>
+    <form action="mailto:raflelargent@gmail.com" method="POST" enctype="text/plain">
+        <label for="name">Naam:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="length">Lengte (in cm):</label>
+        <input type="number" id="length" name="length" required>
+
+        <label for="gender">Geslacht:</label>
+        <select id="gender" name="gender" required>
+            <option value="man">Man</option>
+            <option value="vrouw">Vrouw</option>
+            <option value="anders">Anders</option>
+        </select>
+
+        <label for="instagram">Instagram-pagina:</label>
+        <input type="text" id="instagram" name="instagram" placeholder="@gebruikersnaam">
+
+        <input type="submit" value="Verzenden">
+    </form>
+    <script src="https://static.elfsight.com/platform/platform.js" async></script>
+    <div class="elfsight-app-7dde2b91-6e59-40fa-9b42-d02cd7ca78e6" data-elfsight-app-lazy></div>
+    <!-- Footer -->
+    <footer>
+        <p>Volg ons op sociale media:</p>
+        <a href="https://www.instagram.com/raflelargentofficial?igsh=cXZweW05MjhoYTFy" target="_blank">Instagram</a> |
+        <a href="https://www.tiktok.com/@raflelargent?_t=8qZd9XgidVY&_r=1 target="_blank">TikTok</a>
+        <div class="powered-by">
+            Powered by <a href="https://www.ambex.nl" target="_blank">Ambex</a>
         </div>
-
-        <!-- Welkomsttekst -->
-        <div class="section" id="home">
-            <h1>Welkom bij Ambex</h1>
-            <p>Bij Ambex streven we naar perfectie en innovatie in alles wat we doen. Ontdek hoe wij de industrie transformeren met onze baanbrekende oplossingen en diensten.</p>
-        </div>
-
-        <!-- Over Ons -->
-        <div class="section" id="over-ons">
-            <h2>Over Ons</h2>
-            <p>
-                Ambex is een toonaangevend bedrijf dat zich richt op het leveren van geavanceerde oplossingen en diensten op verschillende terreinen. Naast onze expertise in web engineering, waar we innovatieve en hoogwaardige digitale oplossingen bieden, zijn we bezig met het opzetten van een unieke kledinglijn. Deze lijn zal de waarden van creativiteit, stijl en vakmanschap weerspiegelen. Met een team van deskundigen streven wij ernaar om niet alleen de beste resultaten voor onze klanten te behalen, maar ook om grenzen te verleggen in zowel de tech- als mode-industrie.
-                
-                Bij Ambex draait alles om innovatie, kwaliteit en een gedurfde visie op de toekomst.
-            </p>
-        </div>
-
-        <!-- Team -->
-        <div class="section" id="team">
-            <h2>Ons Team</h2>
-            <p><strong>Powered by Ambex</strong></p>
-            <p>Ons team bestaat uit gepassioneerde professionals met expertise op verschillende gebieden. Wij werken samen om de hoogste normen van kwaliteit en klanttevredenheid te waarborgen. Ontdek meer over onze experts en hun bijdragen aan ons succes.</p>
-        </div>
-
-        <!-- Contact / Adres -->
-        <div class="section" id="contact">
-            <h2>Contact / Adres</h2>
-            <p>Voor afspraken en vragen kunt u eenvoudig contact met ons opnemen via de bovenstaande methoden. Wij staan klaar om u te helpen en te zorgen voor een geweldige ervaring bij Ambex.</p> 
-        </div>
-
-<!-- Portfolio / Website Grid -->
-<div class="section" id="portfolio">
-    <h2>Ons Portfolio</h2>
-   <details><p>Dubbel klik om de website te openen.</p></details>
-    <div class="clients">
-        <div class="client">
-            <a href="https://www.vivianasnailglam.nl" class="client-link" data-image="vivianasnailglam.png">VivianasNailGlam.nl</a>
-        </div>
-        <div class="client">
-            <a href="http://prismatikai.com/" class="client-link" data-image="prismatik.canva.png">Prismatikai.com</a>
-        </div>
-        <div class="client">
-            <a href="https://www.raflelargent.com" class="client-link" data-image="raflelargent.jpg">RafleLArgent.com</a>
-        </div>
-    </div>
-
-    <div class="slider">
-        <img src="vivianasnailglam.png" class="active" alt="VivianasNailGlam">
-        <img src="prismatik.canva.png" alt="Prismatikai">
-        <img src="raflelargent.jpg" alt="RafleLArgent"> <!-- Corrected image for RafleLArgent -->
-    </div>
-</div>
-<style>
-    .clients {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column; /* Default: items under each other */
-        margin: 20px;
-        gap: 10px; /* Adds space between items */
-    }
-
-    .client {
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
-        padding: 10px;
-        margin: 0 15px;
-    }
-
-    .client-link {
-        display: inline-block;
-        white-space: normal; /* Text wraps on multiple lines */
-        word-wrap: break-word; /* Break long words */
-        overflow-wrap: break-word; /* Ensures long words break nicely */
-    }
-
-    @media (min-width: 769px) {
-        .clients {
-            flex-direction: row; /* On larger screens, clients will be side by side */
-        }
-    }
-
-    @media (max-width: 768px) {
-        /* On smaller screens (mobile), the default column layout applies */
-        .client-link {
-            display: inline-block;
-            white-space: normal;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-    }
-</style>
-
-
-    <!-- Website Aanvraag Formulier -->
-<div class="section">
-   <h1>Website Aanvraag Formulier</h1>
-   <form action="mailto:Ambex.NL@outlook.com" method="post" enctype="text/plain">
-       <!-- Bedrijfsinformatie -->
-       <label for="business-name">Bedrijfsnaam:</label>
-       <input type="text" id="business-name" name="business-name" required>
-
-       <label for="business-type">Wat voor soort zaak heb je?</label>
-       <input type="text" id="business-type" name="business-type" required>
-
-       <label for="has-website">Heb je al een website?</label>
-       <select id="has-website" name="has-website">
-           <option value="ja">Ja</option>
-           <option value="nee">Nee</option>
-       </select>
-
-       <!-- Website Behoeften -->
-       <label for="website-type">Wat voor soort website wil je?</label>
-       <select id="website-type" name="website-type">
-           <option value="e-commerce">E-commerce</option>
-           <option value="blog">Blog</option>
-           <option value="portfolio">Portfolio</option>
-           <option value="diensten">Diensten</option>
-           <option value="overig">Overig</option>
-       </select>
-
-       <label for="website-goal">Wat is het doel van je website?</label>
-       <input type="text" id="website-goal" name="website-goal" required>
-
-       <label>Gewenste functies:</label>
-       <input type="checkbox" id="webshop" name="features" value="webshop">
-       <label for="webshop">Webshop</label>
-       <input type="checkbox" id="blog" name="features" value="blog">
-       <label for="blog">Blog</label>
-       <input type="checkbox" id="contact-form" name="features" value="contact-form">
-       <label for="contact-form">Contactformulier</label>
-       <input type="checkbox" id="appointments" name="features" value="online-appointments">
-       <label for="appointments">Online afspraak maken</label>
-
-       <!-- Design en Branding -->
-       <label for="has-logo">Heb je al een logo of branding?</label>
-       <select id="has-logo" name="has-logo">
-           <option value="ja">Ja</option>
-           <option value="nee">Nee</option>
-       </select>
-
-       <label for="design-preferences">Heb je een bepaalde stijl of kleuren?</label>
-       <textarea id="design-preferences" name="design-preferences" rows="4" cols="50"></textarea>
-
-       <!-- Domein en Hosting -->
-       <label for="has-domain">Heb je al een domeinnaam?</label>
-       <select id="has-domain" name="has-domain">
-           <option value="ja">Ja</option>
-           <option value="nee">Nee</option>
-       </select>
-
-       <label for="domain-name">Domeinnaam (indien van toepassing):</label>
-       <input type="text" id="domain-name" name="domain-name">
-
-       <label for="has-hosting">Heb je al hosting voor je website?</label>
-       <select id="has-hosting" name="has-hosting">
-           <option value="ja">Ja</option>
-           <option value="nee">Nee</option>
-       </select>
-
-       <!-- Deadline en Budget -->
-       <label for="budget">Wat is je geschatte budget?</label>
-       <input type="text" id="budget" name="budget">
-
-       <label for="deadline">Gewenste opleverdatum:</label>
-       <input type="date" id="deadline" name="deadline">
-
-       <!-- Aanvullende opmerkingen -->
-       <label for="comments">Aanvullende opmerkingen:</label>
-       <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-
-       <input type="submit" value="Verstuur">
-   </form>
-</div>
-</fieldset>
-
-
-        
-        <fieldset style="border: 2px solid #007BFF; border-radius: 10px; padding: 20px; margin: 20px auto; max-width: 600px; background-color: #fff;">
-            <legend style="font-weight: bold; color: #007BFF;">Contact opnemen</legend>
-            <p>Heb je vragen of opmerkingen? Neem contact met ons op via e-mail:</p>
-            <a href="mailto:Ambex.NL@outlook.com" style="color: #007BFF; text-decoration: none; font-weight: bold;">Ambex.NL@outlook.com</a>
-        </fieldset>
-
-
-        <!-- Footer -->
-        <div class="footer">
-            <p>&copy; Ambex. Alle rechten voorbehouden.</p>
-        </div>
-    </div>
-<!-- Scripts -->
-<script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Voorkomt standaard formulier verzenden
-
-        // Verzamelen van formulierdata
-        let formData = new FormData(this);
-        let data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            websiteType: formData.get('website-type'),
-            features: formData.getAll('features'), // Verkrijgt alle geselecteerde features
-            budget: formData.get('budget'),
-            deadline: formData.get('deadline'),
-            comments: formData.get('comments')
-        };
-
-        // Voorbeeld: Print gegevens naar console
-        console.log(data);
-
-        // Hier zou je de gegevens kunnen verzenden naar een server
-        // Bijvoorbeeld met fetch API:
-        /*
-        fetch('je-server-endpoint', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => response.json()).then(result => {
-            console.log(result);
-            // Hier kun je een bevestigingsbericht tonen of andere acties uitvoeren
-        }).catch(error => {
-            console.error(error);
-            // Hier kun je een foutmelding tonen
-        });
-        */
-    });
-
-    window.onload = () => {
-        setTimeout(() => {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
-        }, 3000); // 3 seconden vertraging
-    };
-
-    function loadWebsite(url) {
-        document.getElementById('portfolio-iframe').src = url;
-    }
-
-    function showDetails(website) {
-        document.getElementById('website-details').innerHTML = `<h3>Details van ${website}</h3><p>Hier kunnen meer details over ${website} worden weergegeven.</p>`;
-    }
-
-    <!-- Scripts -->
-
-    document.querySelector('form').addEventListener('submit', function(e) {
-        e.preventDefault(); // Voorkomt standaard formulier verzenden
-
-        // Verzamelen van formulierdata
-        let formData = new FormData(this);
-        let data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            websiteType: formData.get('website-type'),
-            features: formData.getAll('features'), // Verkrijgt alle geselecteerde features
-            budget: formData.get('budget'),
-            deadline: formData.get('deadline'),
-            comments: formData.get('comments')
-        };
-
-        // Voorbeeld: Print gegevens naar console
-        console.log(data);
-
-        // Hier zou je de gegevens kunnen verzenden naar een server
-        // Bijvoorbeeld met fetch API:
-        /*
-        fetch('je-server-endpoint', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => response.json()).then(result => {
-            console.log(result);
-            // Hier kun je een bevestigingsbericht tonen of andere acties uitvoeren
-        }).catch(error => {
-            console.error(error);
-            // Hier kun je een foutmelding tonen
-        });
-        */
-    });
-
+    </footer>
     
-    document.querySelectorAll('.client-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();  // voorkomt dat de link meteen opent
-        let imageSrc = this.getAttribute('data-image');
-        console.log("Afbeelding geselecteerd:", imageSrc);  // Debugging
-        document.querySelectorAll('.slider img').forEach(img => {
-            img.classList.remove('active');
-            if (img.getAttribute('src') === imageSrc) {
-                img.classList.add('active');
-                console.log("Afbeelding zichtbaar:", imageSrc);  // Debugging
-            }
-        });
-    });
-
-    link.addEventListener('dblclick', function(e) {
-        e.preventDefault();  // voorkomt dat de link op dezelfde pagina opent
-        window.open(this.href, '_blank');  // opent de link in een nieuw tabblad
-    });
-});
-
-
-
-// Get all client links
-const clientLinks = document.querySelectorAll('.client-link');
-    const sliderImages = document.querySelectorAll('.slider img');
-
-    clientLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent the default anchor behavior
-            const imageSrc = this.getAttribute('data-image'); // Get the image from data attribute
-
-            // Loop through all slider images and update the 'active' class
-            sliderImages.forEach(img => {
-                img.classList.remove('active'); // Remove 'active' from all
-                if (img.getAttribute('src') === imageSrc) {
-                    img.classList.add('active'); // Add 'active' to the matching image
-                }
-            });
-        });
-    });
-
-    document.querySelectorAll('.view-image').forEach(button => {
-    button.addEventListener('click', function() {
-        const imageSrc = this.getAttribute('data-image');
-        const sliderImages = document.querySelectorAll('.slider img');
-        
-        sliderImages.forEach(img => {
-            img.classList.remove('active');
-            if (img.getAttribute('src') === imageSrc) {
-                img.classList.add('active');
-            }
-        });
-    });
-});
-
-</script>
-
 
 </body>
 </html>
